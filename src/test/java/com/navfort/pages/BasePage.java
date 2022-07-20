@@ -1,10 +1,15 @@
 package com.navfort.pages;
 
 import com.navfort.utilities.Driver;
-import com.navfort.utilities.Driver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 /*
 In this class we will store WebElements common to all pages
@@ -83,6 +88,55 @@ public class BasePage {
     @FindBy(xpath = "//i[@class='fa-share-square']")
     public WebElement shortcutsButton;
 
+
+    /**
+     *
+     */
+
+    @FindBy(css = "div[class='loader-mask shown']")
+    @CacheLookup
+    protected WebElement loaderMask;
+
+
+    /**
+     * Waits until loader screen present. If loader screen will not pop up at all,
+     * NoSuchElementException will be handled  by try/catch block
+     * Thus, we can continue in any case.
+     */
+    public void waitUntilLoaderScreenDisappear() {
+        try {
+            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 8);
+            wait.until(ExpectedConditions.invisibilityOf(loaderMask));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public WebElement findModule(String moduleName) {
+
+        List<WebElement> modules = Driver.getDriver().findElements(By.xpath("//span[@class='title title-level-1']"));
+
+        WebElement baseModule = null;
+        for (WebElement module : modules) {
+            if (module.getAttribute("innerText").equalsIgnoreCase(moduleName)) {
+                baseModule = module;
+            }
+        }
+        return baseModule;
+    }
+
+    public WebElement findButton(String buttonName) {
+
+        List<WebElement> modules = Driver.getDriver().findElements(By.xpath("//span[@class='title title-level-2']"));
+
+        WebElement baseButton = null;
+        for (WebElement module : modules) {
+            if (module.getAttribute("innerText").equalsIgnoreCase(buttonName)) {
+                baseButton = module;
+            }
+        }
+        return baseButton;
+    }
 
 
 
