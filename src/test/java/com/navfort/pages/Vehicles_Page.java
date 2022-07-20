@@ -18,7 +18,7 @@ public class Vehicles_Page {
     @FindBy(css = "[class=add-filter-button]")
     public WebElement manageFiltersButton;
 
-    @FindBy(xpath= "//input[@value='LastOdometer']")
+    @FindBy(xpath = "//input[@value='LastOdometer']")
     public WebElement lastOdometerCheckBox;
 
     @FindBy(css = "[class='btn dropdown-toggle']")
@@ -27,8 +27,18 @@ public class Vehicles_Page {
     @FindBy(xpath = "//div[@class='btn filter-criteria-selector oro-drop-opener oro-dropdown-toggle filter-default-value']")
     public WebElement lastOdometerFilterButton;
 
-    @FindBy(css="[title=Filters]")
+    @FindBy(css = "[title=Filters]")
     public WebElement filtersButton;
+
+    @FindBy(css = "[name=value]")
+    public WebElement filterValueFirstInput;
+
+    @FindBy(css = "[name=value_end]")
+    public WebElement filterValueSecondInput;
+
+    @FindBy(xpath = "//button[.='Update']")
+    public WebElement updateButton;
+
 
     public List<String> getLastOdometerMethods() {
 
@@ -37,8 +47,38 @@ public class Vehicles_Page {
         List<String> textOfElements = new ArrayList<>();
 
         for (WebElement element : elements) {
-            textOfElements.add(element.getText());
+            textOfElements.add(element.getAttribute("innerText"));
         }
         return textOfElements;
     }
+
+    public WebElement getLastOdometerMethod(String method) {
+        return Driver.getDriver().findElement(By.xpath("//a[@class='dropdown-item choice-value' and text()='" + method.toLowerCase() + "']"));
+    }
+
+    public List<WebElement> lastOdometerValues() {
+        return Driver.getDriver().findElements(By.xpath("//td[@data-column-label='Last Odometer']"));
+    }
+
+    public void fillFilterInputs(Integer int1, Integer int2) {
+        filterValueFirstInput.sendKeys("" + int1);
+        filterValueSecondInput.sendKeys("" + int2);
+        updateButton.click();
+    }
+
+    public void fillFilterInputs(Integer int1) {
+        filterValueFirstInput.sendKeys("" + int1);
+        updateButton.click();
+    }
+
+    public List<Integer> getListOfWebElementsValues(List<WebElement> list) {
+        List<Integer> values = new ArrayList<>();
+
+        for (WebElement webElement : list) {
+            String withoutComma = webElement.getText().replace(",", "");
+            values.add(Integer.parseInt(withoutComma));
+        }
+        return values;
+    }
+
 }
