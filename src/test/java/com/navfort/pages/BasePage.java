@@ -1,11 +1,15 @@
 package com.navfort.pages;
 
+import com.navfort.utilities.BrowserUtils;
 import com.navfort.utilities.Driver;
 import com.navfort.utilities.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -86,6 +90,21 @@ public class BasePage {
     @FindBy(xpath = "//i[@class='fa-share-square']")
     public WebElement shortcutsButton;
 
+    //---locators----------------
+    @FindBy(css = "div[class='loader-mask shown']")
+    @CacheLookup
+    protected WebElement loaderMask;
+
+    //--------------------------------------------
+    public void waitUntilLoaderScreenDisappear() {
+        try {
+            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 8);
+            wait.until(ExpectedConditions.invisibilityOf(loaderMask));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public WebElement findModule(String moduleName) {
 
         List<WebElement> modules = Driver.getDriver().findElements(By.xpath("//span[@class='title title-level-1']"));
@@ -112,6 +131,12 @@ public class BasePage {
         return baseButton;
     }
 
+
+    public void clickMenuElement(String menuName, String subMenuName){
+        Driver.getDriver().findElement(By.xpath("//span[text()[normalize-space() = '" + menuName + "']]")).click();
+        BrowserUtils.waitFor(1);
+        Driver.getDriver().findElement(By.xpath("//span[text()[normalize-space() = '" + subMenuName + "']]")).click();
+    }
 
 
 }
