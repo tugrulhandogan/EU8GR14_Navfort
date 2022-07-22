@@ -51,23 +51,58 @@ Feature: As a user, I should be able to use "Last Odometer" filter under 'Fleet-
     Then User should be able to see the vehicles with last odometer more than 25000
 
   @PERF-1596
-    Scenario: When user selects "Less than" method with numeric values, the results should be less than the specified value
-      When User clicks on Last Odometer filter checkbox
-      And User clicks on the Last Odometer button
-      And User selects "Less Than" method
-      And User enters 25000 in the filter field
-      Then User should be able to see the vehicles with last odometer less than 25000
+  Scenario: When user selects "Less than" method with numeric values, the results should be less than the specified value
+    When User clicks on Last Odometer filter checkbox
+    And User clicks on the Last Odometer button
+    And User selects "Less Than" method
+    And User enters 25000 in the filter field
+    Then User should be able to see the vehicles with last odometer less than 25000
 
-    @PERF-1597
-    Scenario: When user selects "Is Empty" method, only empty values should be displayed.
-      When User clicks on Last Odometer filter checkbox
-      And User clicks on the Last Odometer button
-      And User selects "Is Empty" method
-      Then User should be able to see the vehicles with last odometer is empty
+  @PERF-1597
+  Scenario: When user selects "Is Empty" method, only empty values should be displayed.
+    When User clicks on Last Odometer filter checkbox
+    And User clicks on the Last Odometer button
+    And User selects "Is Empty" method
+    Then User should be able to see the vehicles where the last odometer is empty
+
+@PERF-1598
+  Scenario Outline: Last Odometer methods should not accept non-numeric values
+    When User clicks on Last Odometer filter checkbox
+    And User clicks on the Last Odometer button
+    And User selects "<MethodName>" method
+    And User enters "<Values>" in the filter field
+    Then User should not to be able to fill the filter fields with alphabetical characters
+
+    Examples:
+      | MethodName          | Values                   |
+      | Between             | onethousand,twothousand |
+      | Not Between         | onethousand,twothousand |
+      | Equals              | 123.asd                  |
+      | Not Equals          | 123.asd                  |
+      | More Than           | DoesItWork?              |
+      | Less Than           | 15000#                   |
+      | Equals Or More Than | 10000o                   |
+      | Equals Or Less Than | 10o00                    |
 
 
+  @PERF-1599
+  Scenario Outline: Last Odometer methods should accept numeric values
+    When User clicks on Last Odometer filter checkbox
+    And User clicks on the Last Odometer button
+    And User selects "<MethodName>" method
+    And User enters "<Values>" in the filter field
+    Then User should be able to fill the filter fields with numerical characters
 
-
+    Examples:
+      | MethodName          | Values      |
+      | Between             | 10000,20000 |
+      | Not Between         | 15000,20000 |
+      | Equals              | 7000        |
+      | Not Equals          | 4000        |
+      | More Than           | 10000       |
+      | Less Than           | 20000       |
+      | Equals Or More Than | 15000       |
+      | Equals Or Less Than | 15000       |
 
 
 

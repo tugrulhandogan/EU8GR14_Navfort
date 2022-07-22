@@ -6,6 +6,7 @@ import com.navfort.pages.Vehicles_Page;
 import com.navfort.utilities.BrowserUtils;
 import com.navfort.utilities.ConfigurationReader;
 import com.navfort.utilities.Driver;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -117,7 +118,7 @@ public class LastOdometer_StepDefs {
 
     @Given("User clicks on the Last Odometer button")
     public void user_clicks_on_the_last_odometer_button() {
-        BrowserUtils.waitForVisibility(vehicles_page.lastOdometerFilterButton, 5);
+        BrowserUtils.waitForVisibility(vehicles_page.lastOdometerFilterButton, 10);
 
         vehicles_page.lastOdometerFilterButton.click();
 
@@ -172,8 +173,8 @@ public class LastOdometer_StepDefs {
         }
     }
 
-    @Then("User should be able to see the vehicles with last odometer is empty")
-    public void user_should_be_able_to_see_the_vehicles_with_last_odometer_is_empty() {
+    @Then("User should be able to see the vehicles where the last odometer is empty")
+    public void user_should_be_able_to_see_the_vehicles_where_the_last_odometer_is_empty() {
 
         List<String> emptyValues = new ArrayList<>();
 
@@ -190,4 +191,36 @@ public class LastOdometer_StepDefs {
     }
 
 
+    @And("User enters {string} in the filter field")
+    public void userEntersValuesInTheFilterField(String values) {
+        if (values.contains(",")) {
+            String[] valuesArray = values.split(",");
+              vehicles_page.fillFilterInputs(valuesArray[0], valuesArray[1]);
+        } else {
+            vehicles_page.fillFilterInputs(values);
+        }
+    }
+
+    @Then("User should not to be able to fill the filter fields with alphabetical characters")
+    public void user_should_not_to_be_able_to_fill_the_filter_fields_with_alphabetical_characters() {
+        if (vehicles_page.filterValueFirstInput.isDisplayed() && vehicles_page.filterValueSecondInput.isDisplayed()) {
+            System.out.println("vehicles_page.filterValueFirstInput.getAttribute(\"value\") = " + vehicles_page.filterValueFirstInput.getAttribute("value"));
+
+            System.out.println("vehicles_page.filterValueSecondInput.getAttribute(\"value\") = " + vehicles_page.filterValueSecondInput.getAttribute("value"));
+
+            assertTrue(vehicles_page.filterValueFirstInput.getAttribute("value").chars().allMatch(Character::isDigit));
+            assertTrue(vehicles_page.filterValueSecondInput.getAttribute("value").chars().allMatch(Character::isDigit));
+
+
+        } else {
+            System.out.println("vehicles_page.filterValueFirstInput.getAttribute(\"value\") = " + vehicles_page.filterValueFirstInput.getAttribute("value"));
+            assertTrue(vehicles_page.filterValueFirstInput.getAttribute("value").chars().allMatch(Character::isDigit));
+
+        }
+    }
+
+    @Then("User should be able to fill the filter fields with numerical characters")
+    public void user_should_be_able_to_fill_the_filter_fields_with_numerical_characters() {
+        user_should_not_to_be_able_to_fill_the_filter_fields_with_alphabetical_characters();
+    }
 }

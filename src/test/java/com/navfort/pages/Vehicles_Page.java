@@ -67,14 +67,26 @@ public class Vehicles_Page {
         updateButton.click();
     }
 
+    public void fillFilterInputs(String str1, String str2) {
+        filterValueFirstInput.sendKeys(str1);
+        filterValueSecondInput.sendKeys(str2);
+       // updateButton.click();
+    }
+
 
     public void fillFilterInputs(Integer int1) {
         filterValueFirstInput.sendKeys("" + int1);
         updateButton.click();
     }
 
+    public void fillFilterInputs(String str) {
+        filterValueFirstInput.sendKeys("" + str);
+       // updateButton.click();
+    }
+
     /**
      * This method provide us to get list of values of the webElements
+     *
      * @param list of WebElement
      * @return list of Integer
      */
