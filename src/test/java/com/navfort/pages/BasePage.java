@@ -1,5 +1,6 @@
 package com.navfort.pages;
 
+import com.navfort.utilities.BrowserUtils;
 import com.navfort.utilities.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -105,7 +106,7 @@ public class BasePage {
      */
     public void waitUntilLoaderScreenDisappear() {
         try {
-            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 8);
+            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 12);
             wait.until(ExpectedConditions.invisibilityOf(loaderMask));
         } catch (Exception e) {
             e.printStackTrace();
@@ -138,6 +139,11 @@ public class BasePage {
         return baseButton;
     }
 
+    public void clickMenuElement(String menuName, String subMenuName){
+        Driver.getDriver().findElement(By.xpath("//span[text()[normalize-space() = '" + menuName + "']]")).click();
+        BrowserUtils.waitFor(1);
+        Driver.getDriver().findElement(By.xpath("//span[text()[normalize-space() = '" + subMenuName + "']]")).click();
+    }
 
 
 }

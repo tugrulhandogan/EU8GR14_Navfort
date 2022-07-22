@@ -56,6 +56,7 @@ public class Vehicles_Page {
         return Driver.getDriver().findElement(By.xpath("//a[@class='dropdown-item choice-value' and text()='" + method.toLowerCase() + "']"));
     }
 
+
     public List<WebElement> lastOdometerValues() {
         return Driver.getDriver().findElements(By.xpath("//td[@data-column-label='Last Odometer']"));
     }
@@ -66,17 +67,28 @@ public class Vehicles_Page {
         updateButton.click();
     }
 
+
     public void fillFilterInputs(Integer int1) {
         filterValueFirstInput.sendKeys("" + int1);
         updateButton.click();
     }
 
+    /**
+     * This method provide us to get list of values of the webElements
+     * @param list of WebElement
+     * @return list of Integer
+     */
     public List<Integer> getListOfWebElementsValues(List<WebElement> list) {
         List<Integer> values = new ArrayList<>();
 
         for (WebElement webElement : list) {
-            String withoutComma = webElement.getText().replace(",", "");
-            values.add(Integer.parseInt(withoutComma));
+
+            String lastOdometerValue = webElement.getText();
+
+            if (lastOdometerValue.contains(",")) {
+                lastOdometerValue = lastOdometerValue.replace(",", "");
+            } else
+                values.add(Integer.parseInt(lastOdometerValue));
         }
         return values;
     }
