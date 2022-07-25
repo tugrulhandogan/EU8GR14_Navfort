@@ -5,6 +5,7 @@ Feature:As a 'Sales Manager' and 'Store Manager', I should be able to delete a c
   Background:
     Given Users on the Fleet-Vehicle page
 
+
   @PERF-1614
   Scenario Outline: verify delete button by hovering over the three dot as a <userType>
     When the user as a "<userType>" hovering over the three dot
