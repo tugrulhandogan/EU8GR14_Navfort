@@ -140,31 +140,6 @@ public class BasePage {
         }
     }
 
-    public WebElement findModule(String moduleName) {
-
-        List<WebElement> modules = Driver.getDriver().findElements(By.xpath("//span[@class='title title-level-1']"));
-
-        WebElement baseModule = null;
-        for (WebElement module : modules) {
-            if (module.getAttribute("innerText").equalsIgnoreCase(moduleName)) {
-                baseModule = module;
-            }
-        }
-        return baseModule;
-    }
-
-    public WebElement findButton(String buttonName) {
-
-        List<WebElement> modules = Driver.getDriver().findElements(By.xpath("//span[@class='title title-level-2']"));
-
-        WebElement baseButton = null;
-        for (WebElement module : modules) {
-            if (module.getAttribute("innerText").equalsIgnoreCase(buttonName)) {
-                baseButton = module;
-            }
-        }
-        return baseButton;
-    }
 
     public void clickMenuElement(String menuName, String subMenuName){
         Driver.getDriver().findElement(By.xpath("//span[text()[normalize-space() = '" + menuName + "']]")).click();
