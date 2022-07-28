@@ -39,6 +39,14 @@ public class Vehicles_Page {
     @FindBy(xpath = "//button[.='Update']")
     public WebElement updateButton;
 
+    //-------------located elements for Delete Button  start !!-------------
+
+    @FindBy(xpath = "//a[@class='dropdown-toggle']")
+    public WebElement threeDotDropDown;
+
+    @FindBy(linkText = "Delete")
+    public WebElement deleteButton;
+
 
     public List<String> getLastOdometerMethods() {
 
