@@ -40,6 +40,8 @@ public class Vehicles_Page {
     public WebElement updateButton;
 
 
+
+
     public List<String> getLastOdometerMethods() {
 
         List<WebElement> elements = Driver.getDriver().findElements(By.xpath("//a[@class='dropdown-item choice-value']"));
