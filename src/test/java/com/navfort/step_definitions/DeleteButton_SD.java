@@ -46,4 +46,9 @@ public class DeleteButton_SD {
     public void theDeleteMessageShouldBeDisplayed() {
         Assert.assertTrue(vehicles_page.deleteMessage.isDisplayed());
     }
+
+
+
+
+
 }

@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         glue = "com/navfort/step_definitions",
         dryRun = false,
-        tags = "@PERF-1614",
+        tags = "@PERF-1581",
         publish = false
 
 )

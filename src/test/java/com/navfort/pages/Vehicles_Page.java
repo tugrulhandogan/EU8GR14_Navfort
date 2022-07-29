@@ -39,7 +39,7 @@ public class Vehicles_Page {
     @FindBy(xpath = "//button[.='Update']")
     public WebElement updateButton;
 
-    //-------------located elements for Delete Button  start !!-------------
+    //------Annzir-------located elements for Delete Button  start !!-------------
 
     @FindBy(xpath = "//tr[1]/td[21]/div/div/a")
     public WebElement threeDotDropDown;
@@ -47,9 +47,10 @@ public class Vehicles_Page {
     @FindBy(xpath = "//a[@title='Delete'])[2]")
     public WebElement deleteButton;
 
-    @FindBy(css = "//div[h3='Delete Confirmation']")
+    @FindBy(xpath = "//div[@h3='Delete Confirmation']")
     public WebElement deleteMessage;
 
+//-------------Annzir-----located elements fro delete button finish!!----------------
 
     public List<String> getLastOdometerMethods() {
 
@@ -81,7 +82,7 @@ public class Vehicles_Page {
     public void fillFilterInputs(String str1, String str2) {
         filterValueFirstInput.sendKeys(str1);
         filterValueSecondInput.sendKeys(str2);
-       // updateButton.click();
+        // updateButton.click();
     }
 
 
@@ -92,7 +93,7 @@ public class Vehicles_Page {
 
     public void fillFilterInputs(String str) {
         filterValueFirstInput.sendKeys("" + str);
-       // updateButton.click();
+        // updateButton.click();
     }
 
     /**
