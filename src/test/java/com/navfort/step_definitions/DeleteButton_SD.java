@@ -11,7 +11,9 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class DeleteButton_SD {
 
@@ -19,37 +21,29 @@ public class DeleteButton_SD {
     BasePage basePage = new BasePage();
     Vehicles_Page vehicles_page = new Vehicles_Page();
 
-    @Given("{string} is logged in to the application and clicks {string} module and {string} tab")
-    public void is_logged_in_to_the_application_and_is_on_the_page(String userType, String module, String tab) {
-
-        Driver.getDriver().get(ConfigurationReader.getProperty("loginPage"));
-
-        if (userType.equalsIgnoreCase("driver")) {
-            loginPage.login(ConfigurationReader.getProperty("driverUsername"), ConfigurationReader.getProperty("password"));
-        } else if (userType.equalsIgnoreCase("salesmanager")) {
-            loginPage.login(ConfigurationReader.getProperty("salesManagerUsername"), ConfigurationReader.getProperty("password"));
-        } else if (userType.equalsIgnoreCase("storemanager")) {
-            loginPage.login(ConfigurationReader.getProperty("storeManagerUsername"), ConfigurationReader.getProperty("password"));
-        }
-        basePage.waitUntilLoaderScreenDisappear();
-
-        basePage.findModule(module).click();
-        basePage.findButton(tab).click();
-
-    }
-
     @When("the user hovering over the three dot")
     public void theUserHoveringOverTheThreeDot() {
+        BrowserUtils.waitForVisibility(vehicles_page.threeDotDropDown,5);
         BrowserUtils.hover(vehicles_page.threeDotDropDown);
+        BrowserUtils.waitFor(3);
     }
 
     @Then("The user see the Delete button")
     public void theUserSeeTheDeleteButton() {
+       BrowserUtils.waitFor(5);/// BrowserUtils.waitForClickablility(vehicles_page.deleteButton, 3);
+        BrowserUtils.hover(vehicles_page.deleteButton);
         Assert.assertTrue(vehicles_page.deleteButton.isDisplayed());
+        //vehicles_page.deleteButton.click();
     }
 
     @And("the user clicks on the delete button")
     public void theUserClicksOnTheDeleteButton() {
         vehicles_page.deleteButton.click();
+    }
+
+
+    @Then("the delete message should be displayed")
+    public void theDeleteMessageShouldBeDisplayed() {
+        Assert.assertTrue(vehicles_page.deleteMessage.isDisplayed());
     }
 }
