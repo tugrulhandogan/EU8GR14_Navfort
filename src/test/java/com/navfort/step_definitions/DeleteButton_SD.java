@@ -48,7 +48,14 @@ public class DeleteButton_SD {
     }
 
 
+    @And("the user click conform delete button on pop up")
+    public void theUserClickConformDeleteButtonOnPopUp() {
+        vehicles_page.comfirmDelete.click();
+    }
 
-
-
+    @Then("the {string} should be displayed")
+    public void theShouldBeDisplayed(String expectedMessage) {
+     String actualMessage =  vehicles_page.itemDeletedMessage.getText();
+     Assert.assertEquals(actualMessage,expectedMessage);
+    }
 }

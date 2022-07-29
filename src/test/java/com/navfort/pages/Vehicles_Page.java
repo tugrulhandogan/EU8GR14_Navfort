@@ -50,6 +50,12 @@ public class Vehicles_Page {
     @FindBy(xpath = "//div[@h3='Delete Confirmation']")
     public WebElement deleteMessage;
 
+    @FindBy(xpath = "//a[class='btn ok btn-danger']")
+    public WebElement comfirmDelete;
+
+    @FindBy(xpath = "//div[@class='flash-messages-holder']")
+    public WebElement itemDeletedMessage;
+
 //-------------Annzir-----located elements fro delete button finish!!----------------
 
     public List<String> getLastOdometerMethods() {

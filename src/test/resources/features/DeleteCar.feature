@@ -19,16 +19,19 @@ Feature:As a 'Sales Manager' and 'Store Manager', I should be able to delete a c
   Scenario:"You do not have permission to perform this action." message should be displayed
   when driver click the delete button
     When Driver on the Quick Lanched page
-    When the user hovering over the three dot
+    When Driver click the Fleet option
+    And Driver click the Vehicles option
+    And the user hovering over the three dot
     And the user clicks on the delete button
-    Then "You do not have permission to perform this action." message should be displayed
+    And the user click conform delete button on pop up
+    Then You do not have permission to perform this action message should be displayed
 
   @PERF-1620
   Scenario: user can delete any car and "Item deleted" message should be displayed.
     When the user hovering over the three dot
     And the user clicks on the delete button
-    And click the confirm button on the pop up
-    Then the "item delete message" should be displayed
+    And the user click conform delete button on pop up
+    Then the "item delete" should be displayed
 
 
   @PERF-1621
