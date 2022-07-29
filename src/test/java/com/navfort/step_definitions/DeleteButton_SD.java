@@ -30,7 +30,7 @@ public class DeleteButton_SD {
 
     @Then("The user see the Delete button")
     public void theUserSeeTheDeleteButton() {
-       BrowserUtils.waitFor(5);/// BrowserUtils.waitForClickablility(vehicles_page.deleteButton, 3);
+        BrowserUtils.waitFor(5);/// BrowserUtils.waitForClickablility(vehicles_page.deleteButton, 3);
         BrowserUtils.hover(vehicles_page.deleteButton);
         Assert.assertTrue(vehicles_page.deleteButton.isDisplayed());
         //vehicles_page.deleteButton.click();
