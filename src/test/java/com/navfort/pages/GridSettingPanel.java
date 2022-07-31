@@ -9,8 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GridSetting {
-    public GridSetting(){
+public class GridSettingPanel {
+    public GridSettingPanel(){
         PageFactory.initElements(Driver.getDriver(),this);
     }
 

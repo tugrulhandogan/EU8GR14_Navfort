@@ -1,7 +1,7 @@
 package com.navfort.step_definitions;
 
 import com.navfort.pages.BasePage;
-import com.navfort.pages.GridSetting;
+import com.navfort.pages.GridSettingPanel;
 import com.navfort.pages.LoginPage;
 import com.navfort.pages.Vehicles_Page;
 import com.navfort.utilities.BrowserUtils;
@@ -23,7 +23,7 @@ public class GridSettings_StepsDefs {
     BasePage basePage = new BasePage();
     Vehicles_Page vehicles_page = new Vehicles_Page();
 
-    GridSetting gridSetting = new GridSetting();
+    GridSettingPanel gridSetting = new GridSettingPanel();
 
     Actions actions = new Actions(Driver.getDriver());
 
