@@ -12,11 +12,9 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class GridSettings_StepsDefs {
@@ -26,6 +24,10 @@ public class GridSettings_StepsDefs {
     Vehicles_Page vehicles_page = new Vehicles_Page();
 
     GridSetting gridSetting = new GridSetting();
+
+    Actions actions = new Actions(Driver.getDriver());
+
+
 
 
 
@@ -45,6 +47,7 @@ public class GridSettings_StepsDefs {
 
         basePage.findModule(module).click();
         basePage.findButton(tab).click();
+        basePage.waitUntilLoaderScreenDisappear();
     }
 
     @And("clicks on the gear icon")
@@ -74,15 +77,12 @@ public class GridSettings_StepsDefs {
     }
     @Then("user see {string} on result")
     public void user_see_on_result(String columnName) {
-
-
         for (WebElement gridSettingItem : gridSetting.gridSettingItems) {
             if (gridSettingItem.getText().equals(columnName)){
                 Assert.assertTrue(gridSettingItem.isDisplayed());
             }
         }
     }
-
 
 
     @When("user typing invalid {string} on Quick Search input box")
@@ -94,6 +94,95 @@ public class GridSettings_StepsDefs {
         for (WebElement gridSettingItem : gridSetting.gridSettingItems) {
             Assert.assertFalse(gridSettingItem.isDisplayed());
         }
+    }
+
+    @When("user deselect all the selected items")
+    public void user_deselect_all_the_selected_items() {
+        for (WebElement eachItem : gridSetting.gridSettingItems) {
+            eachItem.click();
+        }
+    }
+    @And("user clicks {string}")
+    public void user_clicks(String columnName) {
+        for (WebElement eachItem : gridSetting.gridSettingItems) {
+            if (eachItem.getText().equals(columnName)){
+                eachItem.click();
+            }
+        }
+
+    }
+
+
+
+    @When("user drag fifth item to the top")
+    public void userDragFifthItemToTheTop() {
+        actions.clickAndHold(gridSetting.fifthItemSort)
+                .pause(1000)
+                .moveToElement(gridSetting.firstItemSort)
+                .pause(1000)
+                .release()
+                .perform();
+
+    }
+
+    @Then("user see the item in first of the list")
+    public void userSeeTheItemInFirstOfTheList() {
+        String actualFirstItemText = gridSetting.firstItemName.getText();
+        Assert.assertEquals("Location",actualFirstItemText);
+        System.out.println("actualFirstItemText = " + actualFirstItemText);
+    }
+
+    @And("user drag sixth item to the bottom")
+    public void userDragSixthItemToTheBottom() {
+
+        actions.clickAndHold(gridSetting.sixthItemSort)
+                .pause(1000)
+                .moveToElement(gridSetting.lastItemSort)
+                .pause(1000)
+                .release()
+                .perform();
+    }
+
+    @Then("user see the item in the last of the list")
+    public void userSeeTheItemInTheLastOfTheList() {
+        List<String> actualList = gridSetting.getGridTableName();
+        String actualLastItemText = actualList.get(19);
+        System.out.println("actualLastItemText = " + actualLastItemText);
+        Assert.assertEquals("Chassis Number",actualLastItemText);
+
+    }
+
+
+    @Then("user see Location is the first column at Fleet-Vehicles page")
+    public void user_see_location_is_the_first_column_at_fleet_vehicles_page() {
+        String actualFirstColumName = gridSetting.getColumnName().get(0);
+        Assert.assertEquals("LOCATION",actualFirstColumName);
+
+    }
+
+    @And("user drag the item to the bottom")
+    public void user_drag_the_item_to_the_bottom() {
+        actions.clickAndHold(gridSetting.firstItemSort)
+                .pause(1000)
+                .moveToElement(gridSetting.lastItemSort)
+                .pause(1000)
+                .release()
+                .perform();
+    }
+    @Then("user see Location is the last column at Fleet-Vehicles page")
+    public void user_see_location_is_the_last_column_at_fleet_vehicles_page() {
+        String actualLastColumn = gridSetting.getColumnName().get(18);
+        Assert.assertEquals("LOCATION",actualLastColumn);
+    }
+
+
+    @When("user search {string} on Quick Search input box start with two white spaces")
+    public void user_search_on_quick_search_input_box_start_with_two_white_spaces(String itemName) {
+       gridSetting.QuickSearchBox.sendKeys(itemName);
+    }
+    @Then("Location should be displayed in result")
+    public void location_should_be_displayed_in_result() {
+        Assert.assertTrue(gridSetting.fifthItemSort.isDisplayed());
     }
 
 
