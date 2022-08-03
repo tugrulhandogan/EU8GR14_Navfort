@@ -19,7 +19,7 @@
      Then user can apply any of the filters
 
       #passed
-    Scenario: 3- User can apply filters by typing the filter name, from 'Manage Filters' menu.
+    Scenario: User can apply filters by typing the filter name, from 'Manage Filters' menu
       When the user clicks on filter menu icon
       And the user clicks on manage filters icon
       And user types a filter name
