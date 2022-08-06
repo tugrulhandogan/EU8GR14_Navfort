@@ -80,7 +80,21 @@ public class FilterMenu_Steps {
         filterMenu_page.location.click();
     }
 
+     //US4
+    @When("user clicks on filter menu icon")
+    public void userClicksOnFilterMenuIcon() {
+        BrowserUtils.waitFor(6);
+        filterMenu_page.filterIcon.click();
+    }
 
+    @And("user clicks on manage filters menu icon")
+    public void userClicksOnManageFiltersMenuIcon() {
+        filterMenu_page.manageFilterBtn.click();
+    }
 
-
+    @Then("user can select and apply multiple filters at the same time")
+    public void userCanSelectAndApplyMultipleFiltersAtTheSameTime() {
+        filterMenu_page.location.click();
+        filterMenu_page.licencePlate.click();
+    }
 }
