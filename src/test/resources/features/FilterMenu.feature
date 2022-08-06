@@ -25,18 +25,19 @@
       And user types a filter name
       Then user should be able to select that filter
 
-      @wip
+      #passed
       Scenario: User can apply multiple filters at the same time
         When user clicks on filter menu icon
         And user clicks on manage filters menu icon
         Then user can select and apply multiple filters at the same time
 
 
+        @wip
+       Scenario: User can remove all filters by clicking on the reset icon
+          When user click on filter icon
+          And then applies multiple filters from manage filters menu
+          Then user can remove all the filters by clicking on the reset icon
 
-
-
-
-      Scenario: User can remove all filters by clicking on the reset icon, under 'Fleet-Vehicles' page
 
 
 

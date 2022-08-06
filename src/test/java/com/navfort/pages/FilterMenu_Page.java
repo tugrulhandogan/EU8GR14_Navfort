@@ -34,6 +34,6 @@ public class FilterMenu_Page {
     @FindBy(xpath = "//input[@type='search']")
     public WebElement filterInput;
 
-    @FindBy(xpath = "//i[@class='fa-refresh']")
+    @FindBy(xpath = "//i[text()=' Reset ']")
     public WebElement resetBtn;
 }

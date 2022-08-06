@@ -97,4 +97,25 @@ public class FilterMenu_Steps {
         filterMenu_page.location.click();
         filterMenu_page.licencePlate.click();
     }
+
+
+    //US5
+    @When("user click on filter icon")
+    public void userClickOnFilterIcon() {
+        BrowserUtils.waitFor(6);
+        filterMenu_page.filterIcon.click();
+    }
+
+    @And("then applies multiple filters from manage filters menu")
+    public void thenAppliesMultipleFiltersFromManageFiltersMenu() {
+        filterMenu_page.manageFilterBtn.click();
+        filterMenu_page.licencePlate.click();
+        filterMenu_page.location.click();
+    }
+
+    @Then("user can remove all the filters by clicking on the reset icon")
+    public void userCanRemoveAllTheFiltersByClickingOnTheResetIcon() {
+        BrowserUtils.waitFor(5);
+        filterMenu_page.resetBtn.click();
+    }
 }
