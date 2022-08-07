@@ -16,9 +16,6 @@ public class FilterMenu_Page {
     @FindBy(xpath = "//span[@class='title title-level-2']")
     public WebElement VehicleBtn;
 
-    @FindBy(xpath = "//i[@class='fa-filter hide-text']")
-    public WebElement filterMenuBtn;
-
     @FindBy(xpath = "//a[@class='action btn mode-icon-only']")
     public WebElement filterIcon;
 
@@ -34,6 +31,6 @@ public class FilterMenu_Page {
     @FindBy(xpath = "//input[@type='search']")
     public WebElement filterInput;
 
-    @FindBy(xpath = "//i[text()=' Reset ']")
+    @FindBy(xpath = "//a[@class='action btn reset-action mode-text-only']")
     public WebElement resetBtn;
 }

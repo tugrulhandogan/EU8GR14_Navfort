@@ -45,7 +45,7 @@ public class FilterMenu_Steps {
     //US- 2
     @When("user clicks on filter button")
     public void userClicksOnFilterButton() {
-        BrowserUtils.waitFor(3);
+        BrowserUtils.waitFor(5);
         filterMenu_page.filterIcon.click();
     }
 

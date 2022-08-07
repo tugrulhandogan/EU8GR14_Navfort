@@ -11,12 +11,13 @@ import org.junit.runner.RunWith;
                 "html:target/cucumber-report.html",
                 "rerun:target/rerun.txt",
                 "me.jvt.cucumber.report.PrettyReports:target/cucumber",
+                "json:target/cucumber.json"
 
         },
         features = "src/test/resources/features",
         glue = "com/navfort/step_definitions",
         dryRun = false,
-        tags = "@wip",
+        tags = "@PERF-1656",
         publish = false
 
 )
