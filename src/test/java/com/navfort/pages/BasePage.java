@@ -1,11 +1,16 @@
 package com.navfort.pages;
 
-import com.navfort.utilities.Driver;
+import com.navfort.utilities.BrowserUtils;
 import com.navfort.utilities.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 import java.util.List;
 
@@ -112,6 +117,35 @@ public class BasePage {
         return baseButton;
     }
 
+    /**
+     *
+     */
+
+    @FindBy(css = "div[class='loader-mask shown']")
+    @CacheLookup
+    protected WebElement loaderMask;
+
+
+    /**
+     * Waits until loader screen present. If loader screen will not pop up at all,
+     * NoSuchElementException will be handled  by try/catch block
+     * Thus, we can continue in any case.
+     */
+    public void waitUntilLoaderScreenDisappear() {
+        try {
+            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+            wait.until(ExpectedConditions.invisibilityOf(loaderMask));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void clickMenuElement(String menuName, String subMenuName){
+        Driver.getDriver().findElement(By.xpath("//span[text()[normalize-space() = '" + menuName + "']]")).click();
+        BrowserUtils.waitFor(1);
+        Driver.getDriver().findElement(By.xpath("//span[text()[normalize-space() = '" + subMenuName + "']]")).click();
+    }
 
 
 }

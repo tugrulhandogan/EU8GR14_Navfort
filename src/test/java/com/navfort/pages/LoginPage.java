@@ -36,4 +36,11 @@ public class LoginPage {
     @FindBy(xpath = "//h2[.='Login'] ")
     public WebElement loginText;
 
+    public void login(String username, String password) {
+
+        inputUsername.sendKeys(username);
+        inputPassword.sendKeys(password);
+        loginButton.click();
+    }
+
 }
