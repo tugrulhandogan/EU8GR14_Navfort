@@ -27,6 +27,24 @@ for given duration
         }
     }
 
+    public static void waitClickability(By locator, int timeOut) {
+        try {
+            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), timeOut);
+            wait.until(ExpectedConditions.elementToBeClickable(Driver.getDriver().findElement(locator)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    //click on a web element using JSexecutor
+    public static void clickWithJSExe(WebElement element) {
+        waitClickability((By) element, 3);
+        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].click();", element);
+    }
+    public static void clickWithMouseHoverAction(WebElement element){
+        Actions actions = new Actions(Driver.getDriver());
+        actions.moveToElement(element).pause(500).click(element).build().perform();
+    }
+
     /*
     This method accepts 3 arguments.
     Arg1: webdriver

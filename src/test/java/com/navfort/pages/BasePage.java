@@ -148,5 +148,40 @@ public class BasePage {
     }
 
 
+    public String getPageTitle(){
+        return Driver.getDriver().getTitle();
+    }
+
+    public void navigateToModule(String menuName) { //Fleet
+        WebElement menu1 = Driver.getDriver().findElement(By.xpath("//span[text()[normalize-space() = '" + menuName + "']]"));
+        BrowserUtils.clickWithWait((By) menu1,2);
+    }
+
+    public void navigateToModule(String menuName, String subMenuName) { //Fleet - Vehicles
+        WebElement menu1 = Driver.getDriver().findElement(By.xpath("//span[text()[normalize-space() = '" + menuName + "']]"));
+        BrowserUtils.clickWithWait((By) menu1,2);
+
+        WebElement menu2 = Driver.getDriver().findElement(By.xpath("//span[text()[normalize-space() = '" + subMenuName + "']]"));
+        BrowserUtils.clickWithWait((By) menu2,2);
+    }
+
+    public void navigateToModule(String menuName, String subMenuName, String subSubmenu) {
+        WebElement menu1 = Driver.getDriver().findElement(By.xpath("//span[text()[normalize-space() = '" + menuName + "']]"));
+        BrowserUtils.clickWithWait((By) menu1,2);
+
+        WebElement menu2 = Driver.getDriver().findElement(By.xpath("//span[text()[normalize-space() = '" + subMenuName + "']]"));
+        BrowserUtils.clickWithWait((By) menu2,2);
+
+        WebElement menu3 = Driver.getDriver().findElement(By.xpath("//span[text()[normalize-space() = '" + subSubmenu + "']]"));
+        BrowserUtils.clickWithWait((By) menu3,2);
+    }
+
+    public void goBack(){
+        Driver.getDriver().navigate().back();
+    }
+
+
 }
+
+
 

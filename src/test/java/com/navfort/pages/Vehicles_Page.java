@@ -1,8 +1,10 @@
 package com.navfort.pages;
 
+import com.navfort.utilities.BrowserUtils;
 import com.navfort.utilities.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -14,6 +16,9 @@ public class Vehicles_Page {
     public Vehicles_Page() {
         PageFactory.initElements(Driver.getDriver(), this);
     }
+
+    @FindBy(xpath = "//tr[@class='grid-row row-click-action'][5]")
+    private WebElement anyRow;
 
     @FindBy(css = "[class=add-filter-button]")
     public WebElement manageFiltersButton;
@@ -41,8 +46,8 @@ public class Vehicles_Page {
 
     //------Annzir-------located elements for Delete Button  start !!-------------
 
-    @FindBy(xpath = "//tr[1]/td[21]/div/div/a")
-    public WebElement threeDotDropDown;
+    @FindBy(xpath = "(//div[@class='dropdown']//*[text()='...'])[5]")
+    private WebElement threeDots;
 
     @FindBy(xpath = "//a[@title='Delete'])[2]")
     public WebElement deleteButton;
@@ -55,6 +60,36 @@ public class Vehicles_Page {
 
     @FindBy(xpath = "//div[@class='flash-messages-holder']")
     public WebElement itemDeletedMessage;
+
+    public void hoverOverThreeDots(){
+        Actions actions = new Actions(Driver.getDriver());
+        //web element receives the mouse event in second attempt
+        //we try twice
+        try {
+            for (int i = 0; i < 2; i++) {
+                actions.moveToElement(threeDots).pause(100).build().perform();
+                BrowserUtils.waitFor(2);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void clickAnyRow() {
+        //click any row with actions class
+        BrowserUtils.clickWithMouseHoverAction(anyRow);
+
+        //regular click method sometimes doesn't work
+        //it works when we click twice
+//		for (int i = 0; i < 2; i++) {
+//			try {
+//				BrowserUtils.waitClickability(anyRow, 2);
+//				anyRow.click();
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
+
+    }
 
 //-------------Annzir-----located elements fro delete button finish!!----------------
 

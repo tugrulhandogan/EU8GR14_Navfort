@@ -31,27 +31,33 @@ Feature:As a 'Sales Manager' and 'Store Manager', I should be able to delete a c
     When the user hovering over the three dot
     And the user clicks on the delete button
     And the user click conform delete button on pop up
-    Then the "item delete" should be displayed
+    Then the "Item delete" should be displayed
 
 
   @PERF-1621
   Scenario:the "car delete message" should be displayed
-    When the user go to'General Information'
-    And  the user click 'Delete' button
-    Then   the "car delete message" should be displayed
+    When The user clicks on any row on the Vehicle - All Cars page
+    And The user is on the General Information page
+    And  the user click Delete button
+    And user click the confirm delete button on pop up
+    Then the Item delete message should be displayed
 
   @PERF-1622
   Scenario: the corresponding deleted car should be removed from Fleet-Vehicle page
-    When the user go to'General Information'
-    And  the user click 'Delete' button
+    When The user clicks on any row on the Vehicle - All Cars page
+    And The user is on the General Information page
+    And  the user click Delete button
+    And user click the confirm delete button on pop up
     Then the corresponding deleted car should be removed
 
 
   @PERF-1638
   Scenario: User can delete the new created car
-    When user click the create car button
-    And user fill the frame
-    And user click the save and close button
+    When The user clicks on any row on the Vehicle - All Cars page
+    And The user is on the General Information page
+    And the user clicks on Create Car button
+    And the user enters new Car information
+    And the user clicks on save changes button
     And user click the delete button on the created car page
     Then the corresponding deleted car should be removed
 

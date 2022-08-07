@@ -1,6 +1,7 @@
 package com.navfort.step_definitions;
 
 import com.navfort.pages.BasePage;
+import com.navfort.pages.GeneralInformationPage;
 import com.navfort.pages.LoginPage;
 import com.navfort.pages.Vehicles_Page;
 import com.navfort.utilities.BrowserUtils;
@@ -15,16 +16,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public class DeleteButton_SD {
 
     LoginPage loginPage = new LoginPage();
     BasePage basePage = new BasePage();
     Vehicles_Page vehicles_page = new Vehicles_Page();
+    GeneralInformationPage generalInformationPage = new GeneralInformationPage();
 
     @When("the user hovering over the three dot")
     public void theUserHoveringOverTheThreeDot() {
-        BrowserUtils.waitForVisibility(vehicles_page.threeDotDropDown,5);
-        BrowserUtils.hover(vehicles_page.threeDotDropDown);
+        vehicles_page.hoverOverThreeDots();
         BrowserUtils.waitFor(3);
     }
 
@@ -57,5 +60,18 @@ public class DeleteButton_SD {
     public void theShouldBeDisplayed(String expectedMessage) {
      String actualMessage =  vehicles_page.itemDeletedMessage.getText();
      Assert.assertEquals(actualMessage,expectedMessage);
+    }
+
+    private List<String> allCarInfoFromRow;
+    private List<String> allCarInfoFromGeneralInfo;
+
+    @Then("the corresponding deleted car should be removed")
+    public void theCorrespondingDeletedCarShouldBeRemoved() {
+        allCarInfoFromGeneralInfo = generalInformationPage.getCarInfoFromGeneralInfo();
+
+        System.out.println("car info from row.........: " + allCarInfoFromRow);
+        System.out.println("car info from general info: " + allCarInfoFromGeneralInfo);
+
+        Assert.assertEquals(allCarInfoFromGeneralInfo, allCarInfoFromRow);
     }
 }
